@@ -1,4 +1,18 @@
 # Starter pipeline
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your PowerShell commands here.
+      
+      # Write your PowerShell commands here.
+      gci env:* 
+      
+      Write-Host $env:BUILD_SOURCEBRANCH
+      Write-Host $env:GenerateInLineSourceMaps
+      $env:GenerateInLineSourceMaps= ($env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/release") -eq $true) -or ($env:BUILD_SOURCEBRANCH.StartsWith("refs/heads/releases/") -eq $true)
+      Write-Host $env:GenerateInLineSourceMaps
+      Write-Host $env:BuildConfiguration
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
